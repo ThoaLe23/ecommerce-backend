@@ -4,18 +4,26 @@ const { genneralAcessToken, genneralRefreshToken } = require("./JwtService");
 
 const createUser = (newUser) => {
   return new Promise(async (resolve, reject) => {
-    const {name, phone,  email, password, confirmPassword ,address} = newUser;
+    const {
+      name,
+      phone,
+      email,
+      password,
+      confirmPassword,
+      address,
+      avatar,
+    } = newUser;
     try {
       const checkEmailUser = await User.findOne({
-        email: email
+        email: email,
       });
-      
-      if (checkEmailUser !== null ) {
+
+      if (checkEmailUser !== null) {
         resolve({
           status: "ERR",
           message: "The email is already",
         });
-      }    
+      }
       const hash = bcrypt.hashSync(password, 10);
       const createdUser = await User.create({
         name,
@@ -88,7 +96,7 @@ const updateUser = (id, data) => {
           message: "The user is not defined",
         });
       }
-      const updatedUser = await User.findByIdAndUpdate(id, data, {new: true});
+      const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
       resolve({
         status: "OK",
         message: "SUCCESS",
