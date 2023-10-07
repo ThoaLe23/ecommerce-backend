@@ -2,6 +2,7 @@ const OrderService = require('../services/OrderService')
 
 const createOrder = async (req,res) => {
   try{
+    
     const { paymentMethod, itemsPrice, shippingPrice, totalPrice,  fullname, address, phone} = req.body
     if( !paymentMethod || !itemsPrice|| !shippingPrice|| !totalPrice|| !fullname|| !address|| !phone) {
       return res.status(200).json({
@@ -18,8 +19,26 @@ const createOrder = async (req,res) => {
   }
 }
 
+const getAllDetailsOrder = async (req,res) => {
+  try{
+    const userId = req.params.id
+    //const token = req.headers
+    if(!userId) {
+          return res.status(200).json({
+            status: 'ERR',
+            message: 'The userId is required'
+          })
+        }
+    const response = await OrderService.getAllDetailsOrder(userId)
+    return res.status(200).json(response)
+  }catch(e) {
+    return res.status(404).json({
+      message: e
+    })
+  }
+}
 
 module.exports = {
   createOrder,
- 
+  getAllDetailsOrder
 }

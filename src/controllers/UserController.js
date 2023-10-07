@@ -69,6 +69,7 @@ const loginUser = async (req, res) => {
       samSite: "strict",
       path: "/",
     });
+    
     return res.status(200).json(newReponse);
   } catch (e) {
     return res.status(404).json({
@@ -114,17 +115,7 @@ const deleteUser = async (req, res) => {
     });
   }
 };
-// export const apiGetPublicProvinces = () => new Promise (async (resolve, reject) => {
-//   try {
-//     const reponse = await axios({
-//       method: 'get',
-//       url: 'https://vapi.vnappmob.com/api/province/'
-//     })
-//     resolve(reponse)
-//   } catch (error) {
-//     reject(error)
-//   }
-// })
+
 const getAllUser = async (req, res) => {
   try {
     const response = await UserService.getAllUser();
@@ -135,17 +126,6 @@ const getAllUser = async (req, res) => {
     });
   }
 };
-
-// const getAllUserprovince = async (req, res) => {
-//   try {
-//     const response = await UserService.getAllUserprovince();
-//     return res.status(200).json(response);
-//   } catch (e) {
-//     return res.status(404).json({
-//       message: e,
-//     });
-//   }
-// };
 
 const getDetailsUser = async (req, res) => {
   try {
@@ -185,6 +165,7 @@ const refreshToken = async (req, res) => {
 };
 const logoutUser = async (req, res) => {
   try {
+    
     res.clearCookie("refresh_token");
     return res.status(200).json({
       status: "OK",
