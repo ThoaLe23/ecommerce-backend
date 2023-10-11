@@ -28,6 +28,6 @@ mongoose
     console.log(err);
   });
 
-app.listen(port, () => {
+  app.listen(port, () => {
   console.log("Server is running in port: ", +port);
 });
